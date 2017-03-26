@@ -1,4 +1,4 @@
-#Learn Vue 2: Step By Step: Object-Oriented Forms: Part 1
+# Learn Vue 2: Step By Step: Object-Oriented Forms: Part 1
 
 - [Lesson 19 on laracast.com](https://laracasts.com/series/learn-vue-2-step-by-step/episodes/19).
 
