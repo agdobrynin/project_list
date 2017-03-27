@@ -11,6 +11,12 @@
     </head>
     <body>
 
+        <div id="app" class="container">
+          <div class="notification">
+            This container is <strong>centered</strong> on desktop.
+          </div>
+        </div>
+
         <script src="{{ URL('js/app.js') }}"></script>
     </body>
 </html>
