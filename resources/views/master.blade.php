@@ -20,7 +20,7 @@
                       <a href="/" class="nav-item is-tab is-hidden-mobile is-active">Home</a>
                       <a href="/create" class="nav-item is-tab is-hidden-mobile">Add project</a>
                     </div>
-                    <span class="nav-toggle">
+                    <span class="nav-toggle" @click="rightMenuShow = true">
                       <span></span>
                       <span></span>
                       <span></span>
