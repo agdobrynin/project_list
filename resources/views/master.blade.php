@@ -8,35 +8,35 @@
         <title>Laravel &amp; Vue </title>
 
         <link rel="stylesheet" href="{{ URL('css/app.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-        <section class="section">
-            <div id="app" class="container  is-fluid">
-                <p>
-                    This container is <strong>centered</strong> on desktop.
-                </p>
-                <p>
-                    <a class="button is-primary" @click="isVisible = true">Show notofication</a>
-                </p>
-                <div class="columns">
-                    <example class="is-danger">
-                        <p slot="title">Some title here...</p>
-                        <div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            <p>
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            </p>
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </div>
-                    </example>
-                </div>
+            <div id="app" class="container">
+
+                <nav class="nav has-shadow">
+                  <div class="container">
+                    <div class="nav-left">
+                      <a class="nav-item">Projects list</a>
+                      <a href="/" class="nav-item is-tab is-hidden-mobile is-active">Home</a>
+                      <a href="/create" class="nav-item is-tab is-hidden-mobile">Add project</a>
+                    </div>
+                    <span class="nav-toggle">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <div class="nav-right nav-menu">
+                      <a href="/" class="nav-item is-tab is-hidden-tablet is-active">Home</a>
+                      <a href="/create" class="nav-item is-tab is-hidden-tablet">Add project</a>
+                    </div>
+                  </div>
+                </nav>
+
+
+                @yield('content')
 
             </div>
-        </section>
+
         <script src="{{ URL('js/app.js') }}"></script>
     </body>
 </html>
