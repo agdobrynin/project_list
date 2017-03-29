@@ -14,8 +14,11 @@
     export default {
         data(){
             return{
-                isVisible: false
+                isVisible: true
             }
+        },
+        mounted(){
+            this.isVisible = true;
         },
         methods:{
 
