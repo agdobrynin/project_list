@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-            <div id="app" class="container">
+            <div id="app" class="container section">
 
                 <nav class="nav has-shadow">
                   <div class="container">
@@ -23,16 +23,17 @@
                       </a>
                       <a href="/create" class="nav-item is-tab {{ Request::is('create')? 'is-active':'' }} is-hidden-mobile">Projects</a>
                     </div>
-                    <span class="nav-toggle" @click="rightMenuShow = true">
+                    <span class="nav-toggle" @click="rightMenuShow = rightMenuShow != true">
                       <span></span>
                       <span></span>
                       <span></span>
                     </span>
-                    <div class="nav-right nav-menu" v-show="rightMenuShow">
+                    <div class="nav-right nav-menu is-active" v-show="rightMenuShow">
                       <a href="/create" class="nav-item is-tab is-hidden-tablet {{ Request::is('create')? 'is-active':'' }}">Projects</a>
                     </div>
                   </div>
                 </nav>
+                <p>&nbsp;</p>
                 @yield('content')
 
             </div>
