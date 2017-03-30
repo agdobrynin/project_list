@@ -8,10 +8,11 @@
         <title>Laravel &amp; Vue </title>
 
         <link rel="stylesheet" href="{{ URL('css/app.css') }}">
+        <link rel="stylesheet" href="{{ URL('css/css.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-            <div id="app" class="container section">
+            <div id="app">
 
                 <nav class="nav has-shadow">
                   <div class="container">
@@ -28,16 +29,28 @@
                       <span></span>
                       <span></span>
                     </span>
-                    <div class="nav-right nav-menu is-active" v-show="rightMenuShow">
+                    <div class="nav-right nav-menu is-active animated fadeInRight" v-show="rightMenuShow">
                       <a href="/create" class="nav-item is-tab is-hidden-tablet {{ Request::is('create')? 'is-active':'' }}">Projects</a>
                     </div>
                   </div>
                 </nav>
-                <p>&nbsp;</p>
-                @yield('content')
+                <div class="container section">
+                    @yield('content')
+                </div>
 
             </div>
 
+            <footer class="footer">
+              <div class="container">
+                    <div class="content has-text-centered">
+                        <p>
+                            <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+                            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+                            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+                        </p>
+                    </div>
+                </div>
+            </footer>
         <script src="{{ URL('js/app.js') }}"></script>
     </body>
 </html>

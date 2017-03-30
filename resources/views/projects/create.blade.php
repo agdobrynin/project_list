@@ -3,17 +3,17 @@
 @include ('projects.list')
 <form action="" method="post">
     <div class="field">
-      <label class="label">Project name</label>
+      <label class="label">Проект</label>
       <p class="control">
-        <input class="input" type="text" placeholder="" value="">
+        <input class="input" type="text" placeholder="Название" value="">
       </p>
       <p class="help">This username is available</p>
     </div>
 
     <div class="field">
-      <label class="label">Project description</label>
+      <label class="label">Подробное описание</label>
       <p class="control">
-        <textarea class="textarea" placeholder="Textarea"></textarea>
+        <textarea class="textarea" placeholder="Описание"></textarea>
       </p>
       <p class="help">This username is available</p>
     </div>
