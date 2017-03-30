@@ -1,6 +1,6 @@
 @extends('master')
-@include ('projects.list')
 @section('content')
+@include ('projects.list')
 <form action="" method="post">
     <div class="field">
       <label class="label">Project name</label>

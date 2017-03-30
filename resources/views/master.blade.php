@@ -16,23 +16,23 @@
                 <nav class="nav has-shadow">
                   <div class="container">
                     <div class="nav-left">
-                      <a class="nav-item">Projects list</a>
-                      <a href="/" class="nav-item is-tab is-hidden-mobile is-active">Home</a>
-                      <a href="/create" class="nav-item is-tab is-hidden-mobile">Add project</a>
+                      <a class="nav-item" href="/">
+                          <span class="icon">
+                            <i class="fa fa-home"></i>
+                          </span>
+                      </a>
+                      <a href="/create" class="nav-item is-tab {{ Request::is('create')? 'is-active':'' }} is-hidden-mobile">Projects</a>
                     </div>
                     <span class="nav-toggle" @click="rightMenuShow = true">
                       <span></span>
                       <span></span>
                       <span></span>
                     </span>
-                    <div class="nav-right nav-menu">
-                      <a href="/" class="nav-item is-tab is-hidden-tablet is-active">Home</a>
-                      <a href="/create" class="nav-item is-tab is-hidden-tablet">Add project</a>
+                    <div class="nav-right nav-menu" v-show="rightMenuShow">
+                      <a href="/create" class="nav-item is-tab is-hidden-tablet {{ Request::is('create')? 'is-active':'' }}">Projects</a>
                     </div>
                   </div>
                 </nav>
-
-
                 @yield('content')
 
             </div>

@@ -945,14 +945,19 @@ window.Vue = __webpack_require__(28);
 window.axios = __webpack_require__(10);
 
 window.axios.defaults.headers.common = {
-  'X-CSRF-TOKEN': window.csrfToken,
-  'X-Requested-With': 'XMLHttpRequest'
+    'X-CSRF-TOKEN': window.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 //Vue.component('example', require('./components/Example.vue'));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: function data() {
+        return {
+            rightMenuShow: false
+        };
+    }
 });
 
 /***/ }),

@@ -24,6 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+
         $projects = Project::all();
         return view('projects.create',compact('projects'));
 
