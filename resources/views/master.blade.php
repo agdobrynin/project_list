@@ -13,7 +13,6 @@
     </head>
     <body>
             <div id="app">
-
                 <nav class="nav has-shadow">
                   <div class="container">
                     <div class="nav-left">
@@ -29,12 +28,12 @@
                       <span></span>
                       <span></span>
                     </span>
-                    <div class="nav-right nav-menu is-active animated fadeInRight" v-show="rightMenuShow">
+                    <div class="nav-right nav-menu is-active animated bounceInRight" v-show="rightMenuShow">
                       <a href="/create" class="nav-item is-tab is-hidden-tablet {{ Request::is('create')? 'is-active':'' }}">Projects</a>
                     </div>
                   </div>
                 </nav>
-                <div class="container section">
+                <div class="container section main_content">
                     @yield('content')
                 </div>
 
