@@ -926,12 +926,11 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__errors_form_js__ = __webpack_require__(34);
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -955,44 +954,6 @@ window.axios.defaults.headers.common = {
 
 //Vue.component('example', require('./components/Example.vue'));
 
-var Errors = function () {
-    function Errors() {
-        _classCallCheck(this, Errors);
-
-        this.errors = {};
-    }
-
-    _createClass(Errors, [{
-        key: 'get',
-        value: function get(field) {
-            if (this.errors[field]) {
-                return this.errors[field][0];
-            }
-        }
-    }, {
-        key: 'record',
-        value: function record(errors) {
-            this.errors = errors;
-        }
-    }, {
-        key: 'clear',
-        value: function clear(field) {
-            delete this.errors[field];
-        }
-    }, {
-        key: 'has',
-        value: function has(field) {
-            return this.errors.hasOwnProperty(field);
-        }
-    }, {
-        key: 'any',
-        value: function any() {
-            return Object.keys(this.errors).length > 0;
-        }
-    }]);
-
-    return Errors;
-}();
 
 var app = new Vue({
     el: '#app',
@@ -1001,7 +962,7 @@ var app = new Vue({
             rightMenuShow: false,
             name: '',
             description: '',
-            errors: new Errors()
+            errors: new __WEBPACK_IMPORTED_MODULE_0__errors_form_js__["a" /* Errors */]()
         };
     },
 
@@ -11232,6 +11193,62 @@ module.exports = g;
 __webpack_require__(8);
 module.exports = __webpack_require__(9);
 
+
+/***/ }),
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Errors; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Form errors class
+ * @type {Object}
+ */
+var Errors = function () {
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    _createClass(Errors, [{
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            delete this.errors[field];
+        }
+    }, {
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+    }]);
+
+    return Errors;
+}();
 
 /***/ })
 /******/ ]);
