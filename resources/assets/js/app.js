@@ -21,11 +21,59 @@ window.axios.defaults.headers.common = {
 
 //Vue.component('example', require('./components/Example.vue'));
 
+class Errors {
+    constructor(){
+        this.errors = {}
+    }
+
+    get( field ){
+        if( this.errors[ field ] ){
+            return this.errors[ field ][0];
+        }
+    }
+
+    record( errors ){
+        this.errors = errors;
+    }
+
+    clear( field ){
+        delete this.errors[ field ];
+    }
+
+    has( field ){
+        return this.errors.hasOwnProperty( field );
+    }
+
+    any(){
+        return Object.keys( this.errors ).length > 0;
+    }
+}
+
 const app = new Vue({
     el: '#app',
     data(){
         return{
-            rightMenuShow: false
+            rightMenuShow: false,
+            name: '',
+            description: '',
+            errors: new Errors
         }
+    },
+    methods:{
+        onSubmit(){
+            axios.post('/store', this.$data)
+            .then( this.onSuccess )
+            .catch( error => this.errors.record( error.response.data ) );
+        },
+
+        onSuccess( res ){
+            //show res.data.message
+            //Update list
+            this.name = '';
+            this.description = '';
+        }
+    },
+    mounted(){
+
     }
 });

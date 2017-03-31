@@ -38,7 +38,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate( request(), [
+            'name' => 'required',
+            'description' => 'required'
+        ] );
+
+        Project::forceCreate([
+            'name' => request('name'),
+            'description' => request('description')
+        ]);
+
+        return ['message' => 'Проект создан успешно'];
     }
 
     /**

@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="{{ URL('css/app.css') }}">
         <link rel="stylesheet" href="{{ URL('css/css.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            window.csrfToken = "{{ csrf_token() }}";
+        </script>
     </head>
     <body>
             <div id="app">
