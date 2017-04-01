@@ -973,7 +973,11 @@ var app = new Vue({
     methods: {
         //На сабмит формы
         onSubmit: function onSubmit() {
-            this.form.submit('POST', '/store');
+            this.form.submit('POST', '/store').then(function (data) {
+                return console.log(data);
+            }).catch(function (errors) {
+                return console.log(errors);
+            });
         }
     }
 });
@@ -11198,7 +11202,6 @@ module.exports = __webpack_require__(9);
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Form; });
-/* unused harmony export Errors */
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11224,32 +11227,56 @@ var Form = function () {
             for (var field in this.originalData) {
                 this[field] = '';
             }
+            this.errors.clear();
         }
+        /**
+         * Выборка всех полей из формы
+         * @return Object
+         */
+
     }, {
         key: 'data',
         value: function data() {
-            var data = Object.assign({}, this);
-            delete data.originalData;
-            delete data.errors;
-
+            var data = {};
+            for (var property in this.originalData) {
+                data[property] = this[property];
+            }
             return data;
+        }
+    }, {
+        key: 'post',
+        value: function post(url) {
+            return this.submit('post', url);
+        }
+    }, {
+        key: 'delete',
+        value: function _delete(url) {
+            return this.submit('delete', url);
         }
     }, {
         key: 'submit',
         value: function submit(requestType, url) {
-            axios[requestType.toLowerCase()](url, this.data()).then(this.onSuccess.bind(this)).catch(this.onFail.bind(this));
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                axios[requestType.toLowerCase()](url, _this.data()).then(function (response) {
+                    _this.onSuccess(response.data);
+                    resolve(response.data);
+                }).catch(function (error) {
+                    _this.onFail(error.response.data);
+                    reject(error.response.data);
+                });
+            });
         }
     }, {
         key: 'onSuccess',
-        value: function onSuccess(responce) {
-            alert(responce.data.message);
-            this.errors.clear();
+        value: function onSuccess(data) {
             this.reset();
         }
     }, {
         key: 'onFail',
         value: function onFail(error) {
-            this.errors.record(error.response.data);
+            this.errors.record(error);
         }
     }]);
 
@@ -11260,6 +11287,7 @@ var Form = function () {
  * Form errors class
  * @type {Object}
  */
+
 var Errors = function () {
     function Errors() {
         _classCallCheck(this, Errors);
@@ -11276,8 +11304,8 @@ var Errors = function () {
         }
     }, {
         key: 'record',
-        value: function record(errors) {
-            this.errors = errors;
+        value: function record(error) {
+            this.errors = error;
         }
     }, {
         key: 'clear',

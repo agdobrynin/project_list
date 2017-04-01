@@ -39,7 +39,9 @@ const app = new Vue({
     methods:{
         //На сабмит формы
         onSubmit(){
-            this.form.submit('POST', '/store');
+            this.form.submit('POST', '/store')
+                .then( data => console.log(data) )
+                .catch( errors => console.log(errors) );
         },
 
     }

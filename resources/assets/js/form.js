@@ -15,30 +15,48 @@ export class Form {
         for(let field in this.originalData){
             this[field] = '';
         }
+        this.errors.clear();
     }
-
+    /**
+     * Выборка всех полей из формы
+     * @return Object
+     */
     data(){
-        let data = Object.assign({}, this);
-        delete data.originalData;
-        delete data.errors;
-
+        let data = {};
+        for( let property in this.originalData ){
+            data[property] = this[property];
+        }
         return data;
     }
 
-    submit(requestType, url){
-         axios[requestType.toLowerCase()](url, this.data())
-         .then( this.onSuccess.bind(this) )
-         .catch( this.onFail.bind(this) );
+    post(url){
+        return this.submit('post', url);
     }
 
-    onSuccess( responce ){
-        alert( responce.data.message )
-        this.errors.clear();
+    delete(url){
+        return this.submit('delete', url);
+    }
+
+    submit(requestType, url){
+        return new Promise( ( resolve, reject) =>{
+            axios[requestType.toLowerCase()](url, this.data())
+            .then( response => {
+                this.onSuccess( response.data );
+                resolve( response.data );
+            })
+            .catch( error => {
+                this.onFail( error.response.data );
+                reject( error.response.data );
+            });
+        })
+    }
+
+    onSuccess( data ){
         this.reset();
     }
 
     onFail( error ){
-        this.errors.record( error.response.data )
+        this.errors.record( error )
     }
 }
 
@@ -46,9 +64,9 @@ export class Form {
  * Form errors class
  * @type {Object}
  */
-export class Errors {
+class Errors {
     constructor(){
-        this.errors = {}
+        this.errors = {};
     }
 
     get( field ){
@@ -57,8 +75,8 @@ export class Errors {
         }
     }
 
-    record( errors ){
-        this.errors = errors;
+    record( error ){
+        this.errors = error;
     }
 
     clear( field ){
