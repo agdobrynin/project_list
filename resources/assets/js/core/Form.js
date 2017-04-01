@@ -1,8 +1,9 @@
+import Errors from './Errors.js';
 /**
  * Форма
  * @type {[type]}
  */
-export class Form {
+class Form {
     constructor(data){
         this.originalData = data;
         for(let field in data){
@@ -60,38 +61,4 @@ export class Form {
     }
 }
 
-/**
- * Form errors class
- * @type {Object}
- */
-class Errors {
-    constructor(){
-        this.errors = {};
-    }
-
-    get( field ){
-        if( this.errors[ field ] ){
-            return this.errors[ field ][0];
-        }
-    }
-
-    record( error ){
-        this.errors = error;
-    }
-
-    clear( field ){
-        if( field ){
-            delete this.errors[ field ];
-        } else {
-            this.errors = {};
-        }
-    }
-
-    has( field ){
-        return this.errors.hasOwnProperty( field );
-    }
-
-    any(){
-        return Object.keys( this.errors ).length > 0;
-    }
-}
+export default Form;

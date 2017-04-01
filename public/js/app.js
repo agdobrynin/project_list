@@ -930,7 +930,7 @@ module.exports = function bind(fn, thisArg) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_Form_js__ = __webpack_require__(36);
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -963,7 +963,7 @@ var app = new Vue({
             //Для меню показывающегося когда ширина меньше 768px
             rightMenuShow: false,
             //Форма с обработчиком ошибок и ajax запросов
-            form: new __WEBPACK_IMPORTED_MODULE_0__form_js__["a" /* Form */]({
+            form: new __WEBPACK_IMPORTED_MODULE_0__core_Form_js__["a" /* default */]({
                 name: '',
                 description: ''
             })
@@ -11197,19 +11197,22 @@ module.exports = __webpack_require__(9);
 /* 32 */,
 /* 33 */,
 /* 34 */,
-/* 35 */
+/* 35 */,
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Form; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors_js__ = __webpack_require__(37);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 /**
  * Форма
  * @type {[type]}
  */
+
 var Form = function () {
     function Form(data) {
         _classCallCheck(this, Form);
@@ -11218,7 +11221,7 @@ var Form = function () {
         for (var field in data) {
             this[field] = data[field];
         }
-        this.errors = new Errors();
+        this.errors = new __WEBPACK_IMPORTED_MODULE_0__Errors_js__["a" /* default */]();
     }
 
     _createClass(Form, [{
@@ -11283,11 +11286,21 @@ var Form = function () {
     return Form;
 }();
 
+/* harmony default export */ __webpack_exports__["a"] = (Form);
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /**
  * Form errors class
  * @type {Object}
  */
-
 var Errors = function () {
     function Errors() {
         _classCallCheck(this, Errors);
@@ -11296,19 +11309,19 @@ var Errors = function () {
     }
 
     _createClass(Errors, [{
-        key: 'get',
+        key: "get",
         value: function get(field) {
             if (this.errors[field]) {
                 return this.errors[field][0];
             }
         }
     }, {
-        key: 'record',
+        key: "record",
         value: function record(error) {
             this.errors = error;
         }
     }, {
-        key: 'clear',
+        key: "clear",
         value: function clear(field) {
             if (field) {
                 delete this.errors[field];
@@ -11317,12 +11330,12 @@ var Errors = function () {
             }
         }
     }, {
-        key: 'has',
+        key: "has",
         value: function has(field) {
             return this.errors.hasOwnProperty(field);
         }
     }, {
-        key: 'any',
+        key: "any",
         value: function any() {
             return Object.keys(this.errors).length > 0;
         }
@@ -11330,6 +11343,8 @@ var Errors = function () {
 
     return Errors;
 }();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
 
 /***/ })
 /******/ ]);

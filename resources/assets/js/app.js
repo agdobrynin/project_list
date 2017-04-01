@@ -21,7 +21,7 @@ window.axios.defaults.headers.common = {
 
 //Vue.component('example', require('./components/Example.vue'));
 
-import {Form} from './form.js';
+import Form from './core/Form.js';
 
 const app = new Vue({
     el: '#app',
