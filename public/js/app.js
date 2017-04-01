@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -930,14 +930,14 @@ module.exports = function bind(fn, thisArg) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__errors_form_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_js__ = __webpack_require__(35);
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(28);
+window.Vue = __webpack_require__(29);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -955,33 +955,27 @@ window.axios.defaults.headers.common = {
 //Vue.component('example', require('./components/Example.vue'));
 
 
+
 var app = new Vue({
     el: '#app',
     data: function data() {
         return {
+            //Для меню показывающегося когда ширина меньше 768px
             rightMenuShow: false,
-            name: '',
-            description: '',
-            errors: new __WEBPACK_IMPORTED_MODULE_0__errors_form_js__["a" /* Errors */]()
+            //Форма с обработчиком ошибок и ajax запросов
+            form: new __WEBPACK_IMPORTED_MODULE_0__form_js__["a" /* Form */]({
+                name: '',
+                description: ''
+            })
         };
     },
 
     methods: {
+        //На сабмит формы
         onSubmit: function onSubmit() {
-            var _this = this;
-
-            axios.post('/store', this.$data).then(this.onSuccess).catch(function (error) {
-                return _this.errors.record(error.response.data);
-            });
-        },
-        onSuccess: function onSuccess(res) {
-            //show res.data.message
-            //Update list
-            this.name = '';
-            this.description = '';
+            this.form.submit('POST', '/store');
         }
-    },
-    mounted: function mounted() {}
+    }
 });
 
 /***/ }),
@@ -1832,7 +1826,8 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 28 */
+/* 28 */,
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11157,10 +11152,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(30)))
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 var g;
@@ -11187,7 +11182,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(8);
@@ -11195,17 +11190,71 @@ module.exports = __webpack_require__(9);
 
 
 /***/ }),
-/* 31 */,
 /* 32 */,
 /* 33 */,
-/* 34 */
+/* 34 */,
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Errors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Form; });
+/* unused harmony export Errors */
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Форма
+ * @type {[type]}
+ */
+var Form = function () {
+    function Form(data) {
+        _classCallCheck(this, Form);
+
+        this.originalData = data;
+        for (var field in data) {
+            this[field] = data[field];
+        }
+        this.errors = new Errors();
+    }
+
+    _createClass(Form, [{
+        key: 'reset',
+        value: function reset() {
+            for (var field in this.originalData) {
+                this[field] = '';
+            }
+        }
+    }, {
+        key: 'data',
+        value: function data() {
+            var data = Object.assign({}, this);
+            delete data.originalData;
+            delete data.errors;
+
+            return data;
+        }
+    }, {
+        key: 'submit',
+        value: function submit(requestType, url) {
+            axios[requestType.toLowerCase()](url, this.data()).then(this.onSuccess.bind(this)).catch(this.onFail.bind(this));
+        }
+    }, {
+        key: 'onSuccess',
+        value: function onSuccess(responce) {
+            alert(responce.data.message);
+            this.errors.clear();
+            this.reset();
+        }
+    }, {
+        key: 'onFail',
+        value: function onFail(error) {
+            this.errors.record(error.response.data);
+        }
+    }]);
+
+    return Form;
+}();
 
 /**
  * Form errors class
@@ -11219,29 +11268,33 @@ var Errors = function () {
     }
 
     _createClass(Errors, [{
-        key: "get",
+        key: 'get',
         value: function get(field) {
             if (this.errors[field]) {
                 return this.errors[field][0];
             }
         }
     }, {
-        key: "record",
+        key: 'record',
         value: function record(errors) {
             this.errors = errors;
         }
     }, {
-        key: "clear",
+        key: 'clear',
         value: function clear(field) {
-            delete this.errors[field];
+            if (field) {
+                delete this.errors[field];
+            } else {
+                this.errors = {};
+            }
         }
     }, {
-        key: "has",
+        key: 'has',
         value: function has(field) {
             return this.errors.hasOwnProperty(field);
         }
     }, {
-        key: "any",
+        key: 'any',
         value: function any() {
             return Object.keys(this.errors).length > 0;
         }

@@ -20,33 +20,27 @@ window.axios.defaults.headers.common = {
 };
 
 //Vue.component('example', require('./components/Example.vue'));
-import {Errors} from './errors_form.js';
+
+import {Form} from './form.js';
 
 const app = new Vue({
     el: '#app',
     data(){
         return{
+            //Для меню показывающегося когда ширина меньше 768px
             rightMenuShow: false,
-            name: '',
-            description: '',
-            errors: new Errors
+            //Форма с обработчиком ошибок и ajax запросов
+            form: new Form({
+                name: '',
+                description: ''
+            })
         }
     },
     methods:{
+        //На сабмит формы
         onSubmit(){
-            axios.post('/store', this.$data)
-            .then( this.onSuccess )
-            .catch( error => this.errors.record( error.response.data ) );
+            this.form.submit('POST', '/store');
         },
-
-        onSuccess( res ){
-            //show res.data.message
-            //Update list
-            this.name = '';
-            this.description = '';
-        }
-    },
-    mounted(){
 
     }
 });

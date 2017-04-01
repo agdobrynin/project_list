@@ -39,8 +39,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $this->validate( request(), [
-            'name' => 'required',
-            'description' => 'required'
+            'name' => 'required|unique:projects|min:5',
+            'description' => 'required|min:10'
         ] );
 
         Project::forceCreate([
