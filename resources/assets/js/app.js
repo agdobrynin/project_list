@@ -23,8 +23,11 @@ window.axios.defaults.headers.common = {
 
 import Form from './core/Form.js';
 
+import Modal from './components/Modal.vue';
+
 const app = new Vue({
     el: '#app',
+    components:{ Modal },
     data(){
         return{
             //Для меню показывающегося когда ширина меньше 768px
@@ -33,7 +36,8 @@ const app = new Vue({
             form: new Form({
                 name: '',
                 description: ''
-            })
+            }),
+            showModal: false,
         }
     },
     methods:{
@@ -41,7 +45,11 @@ const app = new Vue({
         onSubmit(){
             this.form.submit('POST', '/store')
                 .then( data => console.log(data) )
-                .catch( errors => console.log(errors) );
+                .catch( errors => {
+                    // this.modal.message = "AAAAA";
+                    // this.modal.isVisible = true;
+                    this.showModal = true;
+                });
         },
 
     }

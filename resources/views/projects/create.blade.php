@@ -1,6 +1,9 @@
 @extends('master')
 @section('content')
 @include ('projects.list')
+
+<Modal v-if="showModal"></Modal>
+
 <form action="/store" method="post" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
     <div class="field">
       <label class="label">Проект</label>
