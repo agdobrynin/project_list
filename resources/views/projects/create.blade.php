@@ -1,6 +1,8 @@
 @extends('master')
 @section('content')
+
 @include ('projects.list')
+
 
 <Modal :message="message" :showmodal="showmodal"></Modal>
 

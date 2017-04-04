@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,15 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+/*
+ | Получение через API списка проектов
+ |
+ */
+Route::get('/project/{id?}', function( $id = null ){
+    if( $id ){
+        return Project::findOrFail($id);
+    }else{
+        return Project::all();
+    }
 });
