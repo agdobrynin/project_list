@@ -1,22 +1,23 @@
 <template>
-    <div class="modal is-active">
-        <div class="modal-background" @click="showModal = false"></div>
+    <div class="modal is-active" v-if="showmodal">
+        <div class="modal-background" @click="showmodal = false"></div>
         <div class="modal-content">
             <div class="box">
                 <article class="media">
-                    <slot></slot>
+                    {{ message }}
                 </article>
             </div>
         </div>
-        <button class="modal-close" @click="showModal = false"></button>
+        <button class="modal-close" @click="showmodal = false"></button>
     </div>
 </template>
 
 <script>
     export default{
+        props:['message', 'showmodal'],
         data(){
             return{
-                showModal: false
+                
             }
         }
     }

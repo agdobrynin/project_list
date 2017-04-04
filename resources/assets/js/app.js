@@ -37,18 +37,26 @@ const app = new Vue({
                 name: '',
                 description: ''
             }),
-            showModal: false,
+            //Текст в модальном окне
+            message: 'Сообщение',
+            //Показывать модальное окно
+            showmodal: false
         }
     },
     methods:{
         //На сабмит формы
         onSubmit(){
+            let name = this.form.get('name');
             this.form.submit('POST', '/store')
-                .then( data => console.log(data) )
+                .then( data => {
+                    this.message = data.message;
+                    this.showmodal = true;
+                    let el = document.createElement("li");
+                    el.innerHTML = `<a href='#'> ${name} </a>`;
+                    document.getElementById('projectList').appendChild(el);
+                })
                 .catch( errors => {
-                    // this.modal.message = "AAAAA";
-                    // this.modal.isVisible = true;
-                    this.showModal = true;
+                    console.log( errors );
                 });
         },
 
