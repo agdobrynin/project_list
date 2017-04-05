@@ -24,10 +24,11 @@ window.axios.defaults.headers.common = {
 import Form from './core/Form.js';
 
 import Modal from './components/Modal.vue';
+import ProjectList from './components/ProjectList.vue';
 
 const app = new Vue({
     el: '#app',
-    components:{ Modal },
+    components:{ Modal, ProjectList },
     data(){
         return{
             //Для меню показывающегося когда ширина меньше 768px
@@ -37,21 +38,59 @@ const app = new Vue({
                 name: '',
                 description: ''
             }),
+<<<<<<< HEAD
             showModal: false
         }
     },
     created(){
         this.showModal = true;
     },
+=======
+            //Текст в модальном окне
+            message: 'Сообщение',
+            //Показывать модальное окно
+            showmodal: false,
+            //Список проектов
+            projects:[],
+            ApiProject: '/api/project/'
+        }
+    },
+
+    beforeMount(){
+        //axios запрос к API
+        axios.get(this.ApiProject, null)
+        .then( response => {
+            this.projects = response.data;
+        })
+        .catch( errors => {
+            console.log(errors);
+            alert(errors)
+        });
+
+    },
+
+>>>>>>> d73a29a75a44855c8ea32475eef66673614d11bc
     methods:{
         //На сабмит формы
         onSubmit(){
+            let name = this.form.get('name');
             this.form.submit('POST', '/store')
                 .then( data => {
+<<<<<<< HEAD
                     alert(data.message)
                 })
                 .catch( errors => {
                     console.log(errors)
+=======
+                    this.message = data.message;
+                    this.showmodal = true;
+                    let el = document.createElement("li");
+                    el.innerHTML = `<a href='#'> ${name} </a>`;
+                    document.getElementById('projectList').appendChild(el);
+                })
+                .catch( errors => {
+                    console.log( errors );
+>>>>>>> d73a29a75a44855c8ea32475eef66673614d11bc
                 });
         },
 

@@ -29,6 +29,14 @@ class Form {
         }
         return data;
     }
+    /**
+     * Получить значение поля
+     * @param  string field Название поля
+     * @return string значение
+     */
+    get(field){
+        return this[field];
+    }
 
     post(url){
         return this.submit('post', url);
