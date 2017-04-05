@@ -37,18 +37,21 @@ const app = new Vue({
                 name: '',
                 description: ''
             }),
-            showModal: false,
+            showModal: false
         }
+    },
+    created(){
+        this.showModal = true;
     },
     methods:{
         //На сабмит формы
         onSubmit(){
             this.form.submit('POST', '/store')
-                .then( data => console.log(data) )
+                .then( data => {
+                    alert(data.message)
+                })
                 .catch( errors => {
-                    // this.modal.message = "AAAAA";
-                    // this.modal.isVisible = true;
-                    this.showModal = true;
+                    console.log(errors)
                 });
         },
 

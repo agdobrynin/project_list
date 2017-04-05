@@ -1,14 +1,10 @@
 <template>
-    <div class="modal is-active">
-        <div class="modal-background" @click="showModal = false"></div>
-        <div class="modal-content">
-            <div class="box">
-                <article class="media">
-                    <slot></slot>
-                </article>
-            </div>
+    <div class="modal is-active" v-if="visible">
+        <div class="modal-background"  @click="close"></div>
+        <div class="notification is-primary" :class="classNotify">
+          <button class="delete" @click="close"></button>
+          {{ message }}
         </div>
-        <button class="modal-close" @click="showModal = false"></button>
     </div>
 </template>
 
@@ -16,7 +12,22 @@
     export default{
         data(){
             return{
-                showModal: false
+                message:null,
+                classNotify: false,
+                visible: false
+            }
+        },
+        events:{
+            show: function(message, classNotify = null ){
+              this.message = message;
+              this.visible = true;
+              this.classNotify = classNotify;
+            }
+        },
+        methods:{
+            closeModal: function(){
+                this.visible = false;
+                this.message = null;
             }
         }
     }

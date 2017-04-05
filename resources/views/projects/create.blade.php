@@ -2,7 +2,7 @@
 @section('content')
 @include ('projects.list')
 
-<Modal v-if="showModal"></Modal>
+<Modal v-if="showModal" @close="showModal = false"></Modal>
 
 <form action="/store" method="post" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
     <div class="field">
