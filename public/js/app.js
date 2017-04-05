@@ -2216,7 +2216,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['message', 'showmodal'],
     data: function data() {
-        return {};
+        return {
+            isshow: this.showmodal,
+            msg: this.message
+        };
     }
 });
 
@@ -2240,6 +2243,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: ['projects', 'linkto'],
+
+    data: function data() {
+        return {
+            mutableProjects: this.projects
+        };
+    },
+
 
     methods: {
         AddProject: function AddProject(project) {
@@ -2416,14 +2426,14 @@ var Form = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 37 */
@@ -2511,7 +2521,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "projects": _vm.projects,
       "linkto": _vm.linkto
     }
-  }, _vm._l((_vm.projects), function(project) {
+  }, _vm._l((_vm.mutableProjects), function(project) {
     return _c('li', [_c('a', {
       attrs: {
         "href": _vm.linkto + project.id
@@ -2538,13 +2548,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.showmodal) ? _c('div', {
+  return (_vm.isshow) ? _c('div', {
     staticClass: "modal is-active"
   }, [_c('div', {
     staticClass: "modal-background",
     on: {
       "click": function($event) {
-        _vm.showmodal = false
+        _vm.isshow = false
       }
     }
   }), _vm._v(" "), _c('div', {
@@ -2553,11 +2563,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "box"
   }, [_c('article', {
     staticClass: "media"
-  }, [_vm._v("\n                " + _vm._s(_vm.message) + "\n            ")])])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("\n                " + _vm._s(_vm.msg) + "\n            ")])])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close",
     on: {
       "click": function($event) {
-        _vm.showmodal = false
+        _vm.isshow = false
       }
     }
   })]) : _vm._e()

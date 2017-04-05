@@ -1,15 +1,15 @@
 <template>
 
-    <div class="modal is-active" v-if="showmodal">
-        <div class="modal-background" @click="showmodal = false"></div>
+    <div class="modal is-active" v-if="isshow">
+        <div class="modal-background" @click="isshow = false"></div>
         <div class="modal-content">
             <div class="box">
                 <article class="media">
-                    {{ message }}
+                    {{ msg }}
                 </article>
             </div>
         </div>
-        <button class="modal-close" @click="showmodal = false"></button>
+        <button class="modal-close" @click="isshow = false"></button>
     </div>
 </template>
 
@@ -18,7 +18,8 @@
         props:['message', 'showmodal'],
         data(){
             return{
-                
+                isshow: this.showmodal,
+                msg: this.message
             }
         }
     }

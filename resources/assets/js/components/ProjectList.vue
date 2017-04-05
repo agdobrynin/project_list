@@ -1,6 +1,6 @@
 <template>
   <ul :projects="projects" :linkto="linkto">
-      <li v-for="project in projects">
+      <li v-for="project in mutableProjects">
           <a
             @click.prevent="show($event)"
             :href="linkto+project.id">{{project.name}}</a>
@@ -12,6 +12,13 @@
 export default {
 
     props:['projects', 'linkto'],
+
+    data(){
+        return {
+            mutableProjects: this.projects
+        }
+
+    },
 
     methods:{
         AddProject(project){
