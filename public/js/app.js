@@ -2239,6 +2239,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -2255,8 +2258,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         AddProject: function AddProject(project) {
             projects.push(project);
         },
-        show: function show(event) {
-            console.log(event.target.href);
+        show: function show(url) {
+
+            return new Promise(function (resolve, reject) {
+                axios.get(url).then(function (response) {
+                    resolve(response.data);
+                }).catch(function (error) {
+                    reject(error.response.data);
+                });
+            });
         }
     }
 });
@@ -2426,7 +2436,7 @@ var Form = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 36 */
@@ -2516,23 +2526,28 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
+  return _c('div', {
+    staticClass: "columns is-multiline",
     attrs: {
       "projects": _vm.projects,
       "linkto": _vm.linkto
     }
   }, _vm._l((_vm.mutableProjects), function(project) {
-    return _c('li', [_c('a', {
+    return _c('div', {
+      staticClass: "column is-3"
+    }, [_c('div', {
+      staticClass: "panel-heading"
+    }, [_c('a', {
       attrs: {
         "href": _vm.linkto + project.id
       },
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.show($event)
+          _vm.show($event.target.href)
         }
       }
-    }, [_vm._v(_vm._s(project.name))])])
+    }, [_vm._v(_vm._s(project.name))])])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true

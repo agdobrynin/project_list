@@ -1,4 +1,4 @@
-<div class="container" v-if="projects.length">
+<div v-if="projects.length">
     <div class="content">
         <h1 class="title is-3">Список проектов</h1>
         <Project-List :projects="projects" linkto="/api/project/"></Project-List>

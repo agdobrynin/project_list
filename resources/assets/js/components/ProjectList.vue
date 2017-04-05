@@ -1,11 +1,14 @@
 <template>
-  <ul :projects="projects" :linkto="linkto">
-      <li v-for="project in mutableProjects">
-          <a
-            @click.prevent="show($event)"
-            :href="linkto+project.id">{{project.name}}</a>
-      </li>
-  </ul>
+  <div :projects="projects" :linkto="linkto" class="columns is-multiline">
+      <div v-for="project in mutableProjects" class="column is-3">
+          <div class="panel-heading">
+              <a
+                class=""
+                @click.prevent="show($event.target.href)"
+                :href="linkto+project.id">{{project.name}}</a>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -24,8 +27,18 @@ export default {
         AddProject(project){
             projects.push(project);
         },
-        show(event){
-            console.log(event.target.href);
+        show(url){
+
+            return new Promise( ( resolve, reject) =>{
+                axios.get(url)
+                .then( response => {
+                    resolve( response.data );
+                })
+                .catch( error => {
+                    reject( error.response.data );
+                });
+            })
+
         }
     }
 }
