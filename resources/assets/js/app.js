@@ -41,7 +41,7 @@ const app = new Vue({
             //Текст в модальном окне
             message: 'Сообщение',
             //Показывать модальное окно
-            showmodal: false,
+            showModal: false,
             //Список проектов
             projects:[],
             ApiProject: '/api/project/'
@@ -58,21 +58,20 @@ const app = new Vue({
             console.log(errors);
             alert(errors)
         });
-
     },
 
     methods:{
         //На сабмит формы
         onSubmit(){
-            let name = this.form.get('name');
+
             this.form.submit('POST', '/store')
                 .then( data => {
+                    this.showModal = true;
                     this.message = data.message;
-                    this.showmodal = true;
                     this.projects.push(data.result);
                 })
                 .catch( errors => {
-                    console.log( errors );
+
                 });
         },
 

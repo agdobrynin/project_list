@@ -3,7 +3,7 @@
 
 @include ('projects.list')
 
-<Modal :message="message" :showmodal="showmodal"></Modal>
+<Modal v-if="showModal" :message="message" @close="showModal = false"></Modal>
 
 <form action="/store" method="post" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
     <div class="field">

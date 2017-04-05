@@ -1,12 +1,22 @@
 <template>
-  <div :projects="projects" :linkto="linkto" class="columns is-multiline">
+  <div :mutableProjects="projects" :linkto="linkto" class="columns is-multiline">
       <div v-for="project in mutableProjects" class="column is-3">
-          <div class="panel-heading">
-              <a
-                class=""
-                @click.prevent="show($event.target.href)"
-                :href="linkto+project.id">{{project.name}}</a>
-        </div>
+
+          <article class="message is-info">
+              <div class="message-header">
+                {{project.name}}
+                <button class="delete"></button>
+              </div>
+              <div class="message-body">
+                {{ShowDescription(project.description,30)}}
+                <p>
+                    <a
+                    class=""
+                    @click.prevent="show($event.target.href)"
+                    :href="linkto+project.id">открыть</a>
+                </p>
+              </div>
+          </article>
       </div>
   </div>
 </template>
@@ -20,12 +30,15 @@ export default {
         return {
             mutableProjects: this.projects
         }
-
     },
 
     methods:{
-        AddProject(project){
-            projects.push(project);
+        ShowDescription( text, max ){
+            if( text.length > max ){
+                return text.slice(0,max)+'...';
+            }else{
+                return text;
+            }
         },
         show(url){
 
