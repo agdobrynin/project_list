@@ -3,12 +3,7 @@
 
 @include ('projects.list')
 
-<<<<<<< HEAD
-<Modal v-if="showModal" @close="showModal = false"></Modal>
-=======
-
 <Modal :message="message" :showmodal="showmodal"></Modal>
->>>>>>> d73a29a75a44855c8ea32475eef66673614d11bc
 
 <form action="/store" method="post" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
     <div class="field">

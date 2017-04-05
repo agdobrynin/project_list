@@ -42,13 +42,12 @@ class ProjectController extends Controller
             'name' => 'required|unique:projects|min:5',
             'description' => 'required|min:10'
         ] );
+        $project = new Project();
+        $project->name = request('name');
+        $project->description = request('description');
+        $project->save();
 
-        Project::forceCreate([
-            'name' => request('name'),
-            'description' => request('description')
-        ]);
-
-        return ['message' => 'Проект создан успешно'];
+        return ['message' => 'Проект создан успешно', 'result' => $project];
     }
 
     /**

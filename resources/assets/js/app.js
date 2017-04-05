@@ -38,14 +38,6 @@ const app = new Vue({
                 name: '',
                 description: ''
             }),
-<<<<<<< HEAD
-            showModal: false
-        }
-    },
-    created(){
-        this.showModal = true;
-    },
-=======
             //Текст в модальном окне
             message: 'Сообщение',
             //Показывать модальное окно
@@ -57,7 +49,7 @@ const app = new Vue({
     },
 
     beforeMount(){
-        //axios запрос к API
+        //axios запрос к API для получения списк проектов
         axios.get(this.ApiProject, null)
         .then( response => {
             this.projects = response.data;
@@ -69,28 +61,18 @@ const app = new Vue({
 
     },
 
->>>>>>> d73a29a75a44855c8ea32475eef66673614d11bc
     methods:{
         //На сабмит формы
         onSubmit(){
             let name = this.form.get('name');
             this.form.submit('POST', '/store')
                 .then( data => {
-<<<<<<< HEAD
-                    alert(data.message)
-                })
-                .catch( errors => {
-                    console.log(errors)
-=======
                     this.message = data.message;
                     this.showmodal = true;
-                    let el = document.createElement("li");
-                    el.innerHTML = `<a href='#'> ${name} </a>`;
-                    document.getElementById('projectList').appendChild(el);
+                    this.projects.push(data.result);
                 })
                 .catch( errors => {
                     console.log( errors );
->>>>>>> d73a29a75a44855c8ea32475eef66673614d11bc
                 });
         },
 
