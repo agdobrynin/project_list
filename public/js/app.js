@@ -2243,6 +2243,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -2256,14 +2262,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        ShowDescription: function ShowDescription(text, max) {
+        showShortDescription: function showShortDescription(text, max) {
             if (text.length > max) {
                 return text.slice(0, max) + '...';
             } else {
                 return text;
             }
         },
-        show: function show(url) {
+        deleteProject: function deleteProject(element) {
+            //покажем что запрос отправлен
+            element.className += " is-loading";
+            //для того чтобы класс is-loading показался
+            element.blur();
+            console.log(element.href);
+            //axios await
+            // remove element
+            //element.parentElement.parentElement.className += " animated fadeOut";
+        },
+        showProject: function showProject(url) {
 
             return new Promise(function (resolve, reject) {
                 axios.get(url).then(function (response) {
@@ -2448,7 +2464,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\na.button{ text-decoration: none;\n}\na.icon{padding:0.05rem;\n}\r\n", ""]);
 
 /***/ }),
 /* 37 */
@@ -2581,21 +2597,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "message is-info"
     }, [_c('div', {
       staticClass: "message-header"
-    }, [_vm._v("\n              " + _vm._s(project.name) + "\n              "), _c('button', {
-      staticClass: "delete"
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "message-body"
-    }, [_vm._v("\n              " + _vm._s(_vm.ShowDescription(project.description, 30)) + "\n              "), _c('p', [_c('a', {
+    }, [_vm._v("\n              " + _vm._s(project.name) + "\n              "), _c('a', {
+      staticClass: "button is-danger is-outlined icon is-small fa fa-times",
       attrs: {
-        "href": _vm.linkto + project.id
+        "href": _vm.linkto + project.id + '/delete'
       },
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.show($event.target.href)
+          _vm.deleteProject($event.target)
         }
       }
-    }, [_vm._v("открыть")])])])])])
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "message-body"
+    }, [_c('a', {
+      attrs: {
+        "href": _vm.linkto + project.id + '/show'
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.showProject($event.target.href)
+        }
+      }
+    }, [_c('p', [_vm._v("\n                    " + _vm._s(_vm.showShortDescription(project.description, 30)) + "\n                  ")])])])])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
